@@ -1,0 +1,40 @@
+{
+  "name": "ai-training-desktop",
+  "version": "1.0.0",
+  "description": "Cross-platform desktop app for AI training marketplace",
+  "main": "src/main.tsx",
+  "type": "commonjs",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc && vite build",
+    "preview": "vite preview",
+    "tauri": "tauri",
+    "tauri:dev": "tauri dev",
+    "tauri:build": "tauri build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/JafarShamzsi/corely-desktop.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/JafarShamzsi/corely-desktop/issues"
+  },
+  "homepage": "https://github.com/JafarShamzsi/corely-desktop#readme",
+  "dependencies": {
+    "@tauri-apps/api": "^2.8.0",
+    "@tauri-apps/plugin-shell": "^2.3.0",
+    "@types/react": "^19.1.11",
+    "@types/react-dom": "^19.1.7",
+    "@vitejs/plugin-react": "^5.0.1",
+    "react": "^19.1.1",
+    "react-dom": "^19.1.1",
+    "typescript": "^5.9.2",
+    "vite": "^7.1.3"
+  },
+  "devDependencies": {
+    "@tauri-apps/cli": "^2.8.1"
+  }
+}

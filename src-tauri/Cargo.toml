@@ -1,9 +1,63 @@
+# ===============================================================================
+# AI TRAINING MARKETPLACE DESKTOP APPLICATION - COMPREHENSIVE CARGO.TOML
+# ===============================================================================
+#
+# This is a comprehensive Cargo.toml for an AI training marketplace desktop 
+# application built with Tauri v2. It includes all necessary dependencies for:
+#
+# 🔧 CORE FEATURES:
+# - Hardware detection (GPU, CPU, RAM monitoring)
+# - ML framework integration (Candle for Rust-native, PyTorch compatibility)
+# - Networking for distributed training (P2P, gRPC)
+# - Security features (OAuth2, encryption, sandboxing)
+# - System integration (Docker, driver installation)
+# - Cross-platform support (Windows, macOS, Linux)
+#
+# 📦 DEPENDENCY GROUPS:
+# - Tauri Framework & Core: Desktop app foundation
+# - System Monitoring: Hardware detection and performance monitoring
+# - ML Frameworks: Candle (Rust-native), PyTorch bindings, ONNX Runtime
+# - Networking: HTTP, WebSocket, P2P, gRPC for distributed training
+# - Security: Authentication, encryption, sandboxing
+# - Database: SQLite, Redis for model and user data storage
+# - Docker: Container management for isolated training environments
+# - Utilities: Logging, file handling, configuration management
+#
+# 🚀 OPTIONAL FEATURES:
+# Use cargo build --features "feature-name" to enable specific functionality:
+# - "candle": Rust-native ML framework (default)
+# - "pytorch": PyTorch bindings for Python compatibility
+# - "onnx": ONNX Runtime for model inference
+# - "gpu-nvidia": NVIDIA GPU support and monitoring
+# - "advanced-networking": P2P and gRPC for distributed training
+# - "security-full": Advanced encryption and OAuth2
+# - "docker": Container management capabilities
+# - "database": SQLite and Redis support
+#
+# 📋 BUILD PROFILES:
+# - dev: Fast compilation with debug info
+# - release: Optimized for production deployment
+# - release-with-debug: Production build with debug symbols
+#
+# 🔍 USAGE EXAMPLES:
+# cargo build                          # Build with default features
+# cargo build --features "pytorch"     # Enable PyTorch support
+# cargo build --features "gpu-nvidia"  # Enable NVIDIA GPU monitoring
+# cargo build --features "docker"      # Enable Docker integration
+# cargo build --release               # Production build
+#
+# ===============================================================================
+
 [package]
 name = "corely-destkop"
 version = "0.1.0"
-description = "A Tauri App"
-authors = ["you"]
+description = "AI Training Marketplace Desktop Application - A comprehensive platform for distributed AI model training and deployment"
+authors = ["AI Training Marketplace Team"]
 edition = "2021"
+license = "MIT"
+repository = "https://github.com/JafarShamzsi/corely-desktop"
+keywords = ["ai", "machine-learning", "desktop", "tauri", "training"]
+categories = ["science", "gui", "network-programming", "development-tools"]
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
@@ -18,8 +72,227 @@ crate-type = ["staticlib", "cdylib", "rlib"]
 tauri-build = { version = "2", features = [] }
 
 [dependencies]
+# ================================
+# TAURI FRAMEWORK & CORE
+# ================================
 tauri = { version = "2", features = [] }
 tauri-plugin-opener = "2"
-serde = { version = "1", features = ["derive"] }
-serde_json = "1"
+
+# ================================
+# SERIALIZATION & DATA HANDLING
+# ================================
+serde = { version = "1.0", features = ["derive", "rc"] }
+serde_json = "1.0"
+serde_yaml = "0.9"
+toml = "0.8"
+bincode = "1.3"
+
+# ================================
+# SYSTEM MONITORING & HARDWARE
+# ================================
+sysinfo = "0.37.0"            # System information (CPU, memory, disks)
+device_query = "4.0.1"        # Input device monitoring
+wgpu = "26.0"                 # GPU interface and detection
+nvml-wrapper = { version = "0.10", optional = true }         # NVIDIA GPU monitoring (optional)
+windows = { version = "0.58", features = [
+    "Win32_System_SystemInformation",
+    "Win32_System_Performance",
+    "Win32_Graphics_Direct3D11"
+], optional = true }
+
+# ================================
+# MACHINE LEARNING FRAMEWORKS
+# ================================
+# Candle - Rust-native ML framework
+candle-core = { version = "0.9.1", optional = true, default-features = false }
+candle-nn = { version = "0.9.1", optional = true }
+candle-transformers = { version = "0.9.1", optional = true }
+candle-datasets = { version = "0.9.1", optional = true }
+
+# PyTorch bindings for Rust
+tch = { version = "0.16", optional = true }
+
+# ONNX Runtime for model inference
+ort = { version = "2.0.0-rc.10", features = [], optional = true, default-features = false }
+
+# Hugging Face tokenizers
+tokenizers = { version = "0.20", optional = true }
+
+# ================================
+# NETWORKING & DISTRIBUTED TRAINING
+# ================================
+tokio = { version = "1.47", features = ["full"] }
+reqwest = { version = "0.12", features = ["json", "rustls-tls"], default-features = false }
+axum = { version = "0.7", default-features = false, features = ["tokio"] }
+
+# P2P networking for distributed training (simplified to avoid OpenSSL issues)
+libp2p = { version = "0.56", features = [
+    "tcp",
+    "mdns",
+    "yamux",
+    "ping"
+], optional = true, default-features = false }
+
+# gRPC for efficient communication
+tonic = { version = "0.12", optional = true }
+prost = { version = "0.13", optional = true }
+
+# ================================
+# SECURITY & AUTHENTICATION
+# ================================
+bcrypt = "0.17"                           # Password hashing
+jsonwebtoken = "9.3"                      # JWT tokens
+ring = { version = "0.17", optional = true }                            # Cryptographic operations
+rustls = { version = "0.23", optional = true }                          # TLS implementation
+oauth2 = { version = "4.4", optional = true }                           # OAuth2 client
+base64 = "0.22"                          # Base64 encoding
+
+# AES encryption
+aes-gcm = { version = "0.10", optional = true }
+chacha20poly1305 = { version = "0.10", optional = true }
+
+# ================================
+# DATABASE & STORAGE
+# ================================
+sqlx = { version = "0.8", features = [
+    "runtime-tokio-rustls",
+    "sqlite",
+    "uuid",
+    "chrono",
+    "json"
+], optional = true }
+redis = { version = "0.26", features = ["tokio-rustls-comp"], optional = true }
+
+# ================================
+# DOCKER & CONTAINER MANAGEMENT
+# ================================
+bollard = { version = "0.18", optional = true }              # Docker API client
+shiplift = { version = "0.6", optional = true }              # Alternative Docker client
+
+# ================================
+# UTILITIES & HELPERS
+# ================================
+uuid = { version = "1.18", features = ["v4", "serde"] }
+chrono = { version = "0.4", features = ["serde"] }
+rand = "0.9"
+anyhow = "1.0"                # Error handling
+thiserror = "1.0"            # Custom error types
+tracing = "0.1"              # Structured logging
+tracing-subscriber = { version = "0.3", features = ["env-filter"] }
+tracing-appender = "0.2"     # Log file rotation
+
+# File system operations
+walkdir = "2.5"              # Directory traversal
+tempfile = "3.12"            # Temporary files
+tar = "0.4"                  # Archive handling
+flate2 = "1.0"               # Compression
+zip = "2.2"                  # ZIP archive support
+
+# Configuration management
+config = "0.14"              # Configuration file parsing
+dirs = "6.0"                 # Standard directories
+
+# ================================
+# SYSTEM INTEGRATION
+# ================================
+# Cross-platform process management
+sysctl = { version = "0.6", optional = true }    # macOS system control
+winreg = { version = "0.52", optional = true }   # Windows registry
+nix = { version = "0.29", optional = true }      # Unix system calls
+
+# Driver and system installation
+which = "7.0"                # Executable location
+semver = "1.0"               # Version parsing
+
+# ================================
+# ASYNC & CONCURRENCY
+# ================================
+futures = "0.3"              # Future combinators
+async-trait = "0.1"          # Async traits
+parking_lot = "0.12"         # Efficient synchronization
+crossbeam = "0.8"            # Lock-free data structures
+rayon = "1.10"               # Data parallelism
+
+# ================================
+# CLI & USER INTERFACE
+# ================================
+clap = { version = "4.5", features = ["derive"] }  # Command line parsing
+indicatif = "0.17"           # Progress bars
+console = "0.15"             # Terminal utilities
+
+# ================================
+# MONITORING & METRICS
+# ================================
+prometheus = { version = "0.13", features = ["process"] }
+metrics = "0.23"             # Metrics collection
+metrics-exporter-prometheus = "0.15"
+
+# ================================
+# IMAGE PROCESSING (for ML datasets)
+# ================================
+image = { version = "0.25", features = ["jpeg", "png", "gif", "webp"] }
+
+[target.'cfg(target_os = "windows")'.dependencies]
+windows = { version = "0.58", features = [
+    "Win32_System_SystemInformation",
+    "Win32_System_Performance",
+    "Win32_Graphics_Direct3D11",
+    "Win32_System_Registry",
+    "Win32_Foundation"
+] }
+winreg = "0.52"
+# Force vendored OpenSSL on Windows to avoid build issues
+openssl = { version = "0.10", features = ["vendored"], optional = true }
+
+[target.'cfg(target_os = "macos")'.dependencies]
+sysctl = "0.6"
+
+[target.'cfg(unix)'.dependencies]
+nix = "0.29"
+
+[features]
+default = ["candle"]
+
+# ML Framework Features
+candle = ["candle-core", "candle-nn", "candle-transformers", "candle-datasets", "tokenizers"]
+pytorch = ["tch"]
+onnx = ["ort"]
+gpu-nvidia = ["nvml-wrapper"]
+gpu-amd = []  # ROCm support (when available)
+
+# Networking Features
+advanced-networking = ["libp2p", "tonic", "prost"]
+
+# Security Features
+security-full = ["oauth2", "ring", "rustls", "aes-gcm", "chacha20poly1305"]
+
+# Database Features
+database = ["sqlx", "redis"]
+
+# Docker & Containerization
+docker = ["bollard", "shiplift"]
+
+# Development & Debug Features
+dev = ["tracing-subscriber/env-filter"]
+
+[profile.dev]
+debug = true
+opt-level = 0
+lto = false
+debug-assertions = true
+overflow-checks = true
+
+[profile.release]
+debug = false
+opt-level = 3
+lto = "thin"
+debug-assertions = false
+overflow-checks = false
+codegen-units = 1
+panic = "abort"
+
+[profile.release-with-debug]
+inherits = "release"
+debug = true
+debug-assertions = true
 

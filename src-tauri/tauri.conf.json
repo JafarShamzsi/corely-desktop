@@ -1,10 +1,11 @@
 {
   "$schema": "https://schema.tauri.app/config/2",
-  "productName": "corely-destkop",
+  "productName": "AI Training Desktop",
   "version": "0.1.0",
-  "identifier": "com.axel.corely-destkop",
+  "identifier": "com.axel.ai-training-desktop",
   "build": {
-    "frontendDist": "../src"
+    "frontendDist": "../dist",
+    "devUrl": "http://localhost:1420"
   },
   "app": {
     "withGlobalTauri": true,

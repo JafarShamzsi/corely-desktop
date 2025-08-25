@@ -22,3 +22,34 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# Environment Variables
+# =====================
+# Ignore environment files to prevent accidental exposure of secrets
+.env
+.env.local
+.env.development
+.env.test
+.env.production
+.env.*.local
+
+# Authentication & Security
+# =========================
+# Ignore any files that might contain sensitive authentication data
+*.pem
+*.key
+*.cert
+*.crt
+secrets/
+auth-config/
+
+# Development Data
+# ================
+# Ignore local development databases and data files
+*.db
+*.sqlite
+*.sqlite3
+data/
+logs/
+temp/
+cache/

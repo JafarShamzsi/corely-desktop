@@ -1,6 +1,7 @@
 import React from 'react';
 import SystemInfoCard from '@/components/SystemInfoCard';
 import ModelList from '@/components/ModelList';
+import StateManagementCard from '@/components/StateManagementCard';
 import { systemService, mlService } from '@/services/api';
 import type { SystemInfo, MLModel } from '@/types';
 
@@ -54,6 +55,10 @@ const Dashboard: React.FC = () => {
   return (
     <div className="dashboard">
       <h1>AI Training Desktop</h1>
+      
+      {/* State Management Demo */}
+      <StateManagementCard />
+      
       <div className="dashboard-grid">
         <SystemInfoCard systemInfo={systemInfo} loading={systemLoading} />
         <ModelList 

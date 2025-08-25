@@ -1591,11 +1591,14 @@ dependencies = [
  "crossbeam",
  "device_query",
  "dirs",
+ "dotenvy",
  "flate2",
  "futures 0.3.31",
+ "hex 0.4.3",
  "image",
  "indicatif",
  "jsonwebtoken",
+ "keyring",
  "libp2p",
  "metrics",
  "metrics-exporter-prometheus",
@@ -1617,6 +1620,7 @@ dependencies = [
  "serde",
  "serde_json",
  "serde_yaml",
+ "sha2",
  "shiplift",
  "sqlx",
  "sysctl 0.6.0",
@@ -1635,6 +1639,7 @@ dependencies = [
  "tracing",
  "tracing-appender",
  "tracing-subscriber",
+ "url",
  "uuid",
  "walkdir",
  "wgpu",
@@ -4472,6 +4477,19 @@ dependencies = [
 ]
 
 [[package]]
+name = "keyring"
+version = "3.6.3"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "eebcc3aff044e5944a8fbaf69eb277d11986064cba30c468730e8b9909fb551c"
+dependencies = [
+ "byteorder",
+ "linux-keyutils",
+ "log",
+ "windows-sys 0.60.2",
+ "zeroize",
+]
+
+[[package]]
 name = "khronos-egl"
 version = "6.0.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -4878,6 +4896,16 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "bae85b5be22d9843c80e5fc80e9b64c8a3b1f98f867c709956eca3efff4e92e2"
 dependencies = [
  "linked-hash-map",
+]
+
+[[package]]
+name = "linux-keyutils"
+version = "0.2.4"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "761e49ec5fd8a5a463f9b84e877c373d888935b71c6be78f3767fe2ae6bed18e"
+dependencies = [
+ "bitflags 2.9.3",
+ "libc",
 ]
 
 [[package]]
@@ -7112,7 +7140,7 @@ dependencies = [
  "once_cell",
  "socket2 0.5.10",
  "tracing",
- "windows-sys 0.52.0",
+ "windows-sys 0.59.0",
 ]
 
 [[package]]

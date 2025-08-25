@@ -231,6 +231,11 @@ metrics-exporter-prometheus = "0.15"
 # IMAGE PROCESSING (for ML datasets)
 # ================================
 image = { version = "0.25", features = ["jpeg", "png", "gif", "webp"] }
+keyring = { version = "3.6.3", features = ["windows-native", "linux-native"] }
+url = "2.5.7"
+sha2 = "0.10.9"
+hex = "0.4.3"
+dotenvy = "0.15.7"
 
 [target.'cfg(target_os = "windows")'.dependencies]
 windows = { version = "0.58", features = [
@@ -264,7 +269,7 @@ gpu-amd = []  # ROCm support (when available)
 advanced-networking = ["libp2p", "tonic", "prost"]
 
 # Security Features
-security-full = ["oauth2", "ring", "rustls", "aes-gcm", "chacha20poly1305"]
+security-full = ["dep:oauth2", "ring", "rustls", "aes-gcm", "chacha20poly1305"]
 
 # Database Features
 database = ["sqlx", "redis"]

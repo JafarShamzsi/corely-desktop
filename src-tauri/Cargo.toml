@@ -259,7 +259,7 @@ nix = "0.29"
 default = ["candle"]
 
 # ML Framework Features
-candle = ["candle-core", "candle-nn", "candle-transformers", "candle-datasets", "tokenizers"]
+candle = ["candle-core", "candle-nn", "candle-transformers", "candle-datasets", "tokenizers", "dep:oauth2"]
 pytorch = ["tch"]
 onnx = ["ort"]
 gpu-nvidia = ["nvml-wrapper"]

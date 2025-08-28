@@ -1,12 +1,18 @@
 import React from 'react';
-import Dashboard from '@/pages/Dashboard';
+import { AuthProvider } from '@/hooks/useAuth';
+import AuthWrapper from '@/components/AuthWrapper';
+import TauriContextProvider from '@/components/TauriContextProvider';
 import './App.css';
 
 const App: React.FC = () => {
   return (
-    <div className="app">
-      <Dashboard />
-    </div>
+    <TauriContextProvider>
+      <AuthProvider>
+        <div className="app">
+          <AuthWrapper />
+        </div>
+      </AuthProvider>
+    </TauriContextProvider>
   );
 };
 
